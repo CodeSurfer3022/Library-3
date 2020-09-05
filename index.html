@@ -18,6 +18,26 @@
         <footer>
 
         </footer>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyDSzr5rbAfB_RE-WkbFGhCcf1XbQ7WOgKs",
+                authDomain: "library-bbceb.firebaseapp.com",
+                databaseURL: "https://library-bbceb.firebaseio.com",
+                projectId: "library-bbceb",
+                storageBucket: "library-bbceb.appspot.com",
+                messagingSenderId: "1023661252675",
+                appId: "1:1023661252675:web:1b231a477bca266e5374f6",
+                measurementId: "G-JJLDLM1H37"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+        </script>
+
         <script src="scripts/main.js"></script>
     </body>
 </html>
