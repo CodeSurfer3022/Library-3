@@ -23,7 +23,7 @@ function ReadStatus() {
     }
     book.Read = read;
     Read.textContent = `Read: ${read}`;
-    console.log(myLibrary);
+    updateLibrary();
 }
 
 function deleteBook() {
@@ -34,6 +34,7 @@ function deleteBook() {
     let index = myLibrary.findIndex(book => book.Title === Title);
     console.log(myLibrary, book, index);
     myLibrary.splice(index, 1);
+    updateLibrary();
     main.removeChild(card);
 }
 
@@ -133,7 +134,7 @@ function editBookInLibrary(card, book) {
     book.Author = details.Author;
     book.Pages = details.Pages;
     book.Read = details.Read;
-    console.log(book, details);
+    updateLibrary();
 
     updateCard(card, book);
 }
@@ -144,6 +145,7 @@ function addBookToLibrary() {
 
     let book = new Book(details.Title, details.Author, details.Pages, details.Read);
     myLibrary.push(book);
+    updateLibrary();
 
     updateCard(card, book);
     addNewCard();
@@ -265,6 +267,10 @@ function bringUpForm() {
     addForm(card, book);
 }
 
+function updateLibrary() {
+    dbRefObject.set({myLibrary})
+}
+
 function addEventListeners() {
     const plus = document.querySelector('button[value="+"]');
     plus.addEventListener('click', bringUpForm);
@@ -272,4 +278,8 @@ function addEventListeners() {
 
 // main starts here
 const main = document.querySelector('main');
+
+// Create DB Reference
+const dbRefObject = firebase.database().ref();
+
 addEventListeners();
