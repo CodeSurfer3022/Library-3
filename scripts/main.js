@@ -170,7 +170,7 @@ function addRadioInputSection(book, property) {
     yesInput.type = 'radio';
     yesInput.name = 'Read';
     yesInput.id = 'yes';
-    yesInput.value = 'yes';
+    yesInput.value = 'Yes';
     if(read) yesInput.checked= "checked";
     section.appendChild(yesInput);
     const yesLabel = document.createElement('label');
@@ -183,7 +183,7 @@ function addRadioInputSection(book, property) {
     noInput.type = 'radio';
     noInput.name = 'Read';
     noInput.id = 'no';
-    noInput.value = 'no';
+    noInput.value = 'No';
     if(!read) noInput.checked= "checked";
     section.appendChild(noInput);
     const noLabel = document.createElement('label');
@@ -237,7 +237,6 @@ function addForm(card, book) {
     form.appendChild(save);
 
     if(!retrieveBookFromLibrary(book.Title).length) {
-        console.log(book);
         save.addEventListener('click', addBookToLibrary);
     } else {
         save.addEventListener('click', function () {
@@ -298,6 +297,7 @@ const main = document.querySelector('main');
 const dbRefObject = firebase.database().ref();
 // Get data from realtime database
 dbRefObject.once('value', data => {
+    if(!data.val()) return;
     const bookList = data.val().myLibrary;
     bookList.forEach(book=>{
         const title = book.Title;
