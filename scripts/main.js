@@ -271,6 +271,21 @@ function updateLibrary() {
     dbRefObject.set({myLibrary})
 }
 
+function addBookCard(book) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    const dummy = document.createElement('div');
+    card.appendChild(dummy);
+    updateCard(card, book);
+    main.appendChild(card);
+}
+
+function renderBooksFromLibrary(){
+    for(let book of myLibrary) {
+        addBookCard(book);
+    }
+}
+
 function addEventListeners() {
     const plus = document.querySelector('button[value="+"]');
     plus.addEventListener('click', bringUpForm);
@@ -281,5 +296,19 @@ const main = document.querySelector('main');
 
 // Create DB Reference
 const dbRefObject = firebase.database().ref();
+// Get data from realtime database
+dbRefObject.once('value', data => {
+    const bookList = data.val().myLibrary;
+    bookList.forEach(book=>{
+        const title = book.Title;
+        const author = book.Author;
+        const pages = book.Pages;
+        const read = book.Read;
+
+        let tmpBook = new Book(title, author, pages, read);
+        myLibrary.push(tmpBook);
+    });
+    renderBooksFromLibrary();
+})
 
 addEventListeners();
