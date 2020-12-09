@@ -11,7 +11,7 @@ function Book(Title, Author, Pages, Read) {
 
 function ReadStatus() {
     let card = this.parentNode.parentNode;
-    let Title = card.querySelector('p[value="Title"]').textContent;
+    let Title = card.querySelector('h3').textContent;
     let book = retrieveBookFromLibrary(Title)[0];
     console.log(book);
     let Read = card.querySelector(`p[value="Read"]`);
@@ -28,7 +28,7 @@ function ReadStatus() {
 
 function deleteBook() {
     let card = this.parentNode.parentNode.parentNode;
-    let Title = card.querySelector('p[value="Title"]').textContent;
+    let Title = card.querySelector('h3').textContent;
     // retrieve book with Title
     let book = retrieveBookFromLibrary(Title);
     let index = myLibrary.findIndex(book => book.Title === Title);
@@ -60,7 +60,7 @@ function  addOptions(options) {
 
 
 function renderDetails(details, book) {
-    let Title = document.createElement('p');
+    let Title = document.createElement('h3');
     Title.setAttribute('value', 'Title')
     Title.textContent = book.Title;
     details.appendChild(Title);
@@ -97,10 +97,6 @@ function addNewCard() {
 function updateCard(card, book) {
     const infoCard = document.createElement('div');
     infoCard.setAttribute('class', 'infoCard');
-
-    const image = document.createElement('img');
-    image.setAttribute('src', 'assets/images/sample2.png');
-    infoCard.appendChild(image);
 
     const details = document.createElement('div');
     details.setAttribute('value', 'details');
@@ -256,7 +252,7 @@ function bringUpForm() {
     let book;
     if(caller === 'edit') {
         card = this.parentNode.parentNode.parentNode;
-        let Title = card.querySelector('p[value="Title"]').textContent;
+        let Title = card.querySelector('h3').textContent;
         book = retrieveBookFromLibrary(Title)[0];
     } else {
         card = this.parentNode;
