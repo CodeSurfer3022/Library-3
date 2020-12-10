@@ -1,6 +1,56 @@
 main {
-    display: flex;
 }
 
 .card {
+    background-color: #ffaa00;
+    width: 150px;
+    height: 180px;
+    margin: 20px 0;
+    border-radius: 20px;
+    font-family: "Helvetica Neue", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.infoCard {
+    height: 100%;
+    width: 100%;
+}
+
+.details {
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+h3 {
+    font-size: 2em;
+}
+
+.options {
+    height: 25%;
+    display: flex;
+    background-color: #ffd500;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.icon {
+    display: flex;
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon:hover {
+    cursor: pointer;
 }
