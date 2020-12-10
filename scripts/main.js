@@ -10,7 +10,7 @@ function Book(Title, Author, Pages, Read) {
 }
 
 function ReadStatus() {
-    let card = this.parentNode.parentNode;
+    let card = this.parentNode.parentNode.parentNode;
     let Title = card.querySelector('h3').textContent;
     let book = retrieveBookFromLibrary(Title)[0];
     console.log(book);
@@ -28,6 +28,7 @@ function ReadStatus() {
 
 function deleteBook() {
     let card = this.parentNode.parentNode.parentNode;
+    console.log(card);
     let Title = card.querySelector('h3').textContent;
     // retrieve book with Title
     let book = retrieveBookFromLibrary(Title);
@@ -39,23 +40,35 @@ function deleteBook() {
 }
 
 function  addOptions(options) {
-    let edit = document.createElement('button');
-    edit.setAttribute('value', 'edit')
-    edit.textContent = 'Edit';
-    edit.addEventListener('click', bringUpForm);
-    options.appendChild(edit);
+    let editicon = document.createElement('div');
+    editicon.classList.add('icon');
+    let edit = document.createElement('i');
+    editicon.setAttribute('value', 'edit')
+    edit.classList.add("fas");
+    edit.classList.add("fa-pencil-alt");
+    editicon.addEventListener('click', bringUpForm);
+    editicon.appendChild(edit);
+    options.appendChild(editicon);
 
-    let del = document.createElement('button');
-    del.setAttribute('value', 'delete')
-    del.textContent = 'Delete';
-    del.addEventListener('click', deleteBook);
-    options.appendChild(del);
+    let readicon = document.createElement('div');
+    readicon.classList.add('icon');
+    let read = document.createElement('i');
+    readicon.setAttribute('value', 'Read');
+    read.classList.add("fas");
+    read.classList.add("fa-check");
+    readicon.addEventListener('click', ReadStatus);
+    readicon.appendChild(read);
+    options.appendChild(readicon);
 
-    let read = document.createElement('button');
-    read.setAttribute('value', 'Read');
-    read.textContent = 'Read';
-    read.addEventListener('click', ReadStatus);
-    options.appendChild(read);
+    let delicon = document.createElement('div');
+    delicon.classList.add('icon');
+    let del = document.createElement('i');
+    delicon.setAttribute('value', 'delete')
+    del.classList.add("fas")
+    del.classList.add("fa-trash");
+    delicon.addEventListener('click', deleteBook);
+    delicon.appendChild(del);
+    options.appendChild(delicon);
 }
 
 
@@ -82,14 +95,18 @@ function renderDetails(details, book) {
 }
 
 function addNewCard() {
-    let plus = document.querySelector('button[value="+"]');
+    let plus = document.querySelector('i[value="+"]');
     if(plus) return;
     const card = document.createElement('div');
     card.setAttribute('class', 'card');
-    const addButton = document.createElement('button');
+    const icon = document.createElement('div');
+    icon.classList.add('icon');
+    const addButton = document.createElement('i');
     addButton.value = '+';
-    addButton.textContent = '+';
-    card.appendChild(addButton);
+    addButton.classList.add("fas");
+    addButton.classList.add("fa-plus");
+    icon.appendChild(addButton);
+    card.appendChild(icon);
     main.appendChild(card);
     addEventListeners();
 }
@@ -100,10 +117,12 @@ function updateCard(card, book) {
 
     const details = document.createElement('div');
     details.setAttribute('value', 'details');
+    details.classList.add('details');
     renderDetails(details, book);
     infoCard.appendChild(details);
 
     const options = document.createElement('div');
+    options.classList.add('options');
     addOptions(options);
     infoCard.appendChild(options);
 
@@ -247,7 +266,7 @@ function retrieveBookFromLibrary(Title) {
 }
 
 function bringUpForm() {
-    let caller = this.value;
+    let caller = this.getAttribute('value');
     let card;
     let book;
     if(caller === 'edit') {
@@ -255,7 +274,7 @@ function bringUpForm() {
         let Title = card.querySelector('h3').textContent;
         book = retrieveBookFromLibrary(Title)[0];
     } else {
-        card = this.parentNode;
+        card = this.parentNode.parentNode;
         book = new Book('', '', '', '');
     }
     card.removeChild(card.lastElementChild);
@@ -282,7 +301,7 @@ function renderBooksFromLibrary(){
 }
 
 function addEventListeners() {
-    const plus = document.querySelector('button[value="+"]');
+    const plus = document.querySelector('.fa-plus');
     plus.addEventListener('click', bringUpForm);
 }
 
