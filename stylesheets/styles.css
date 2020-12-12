@@ -1,7 +1,12 @@
+html {
+    min-height: 100vh;
+    border: 25px solid #02105b;
+}
+
 body {
     font-family: "Helvetica Neue", sans-serif;
-    border: 5px solid #02105b;
 }
+
 main {
     display: flex;
     flex-wrap: wrap;
