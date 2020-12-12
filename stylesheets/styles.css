@@ -1,13 +1,27 @@
+body {
+    font-family: "Helvetica Neue", sans-serif;
+    border: 5px solid #02105b;
+}
 main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+header {
+    text-align: center;
+    font-size: 1.25em;
+    color: #02105b;
+    height: 100px;
+    margin-bottom: 20px;
 }
 
 .card {
     background-color: #ffaa00;
     width: 150px;
     height: 180px;
-    margin: 20px 0;
+    margin: 20px 10px;
     border-radius: 20px;
-    font-family: "Helvetica Neue", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
